@@ -1,8 +1,8 @@
 # Express Proyect
-un proyecto de Expres pensado para relizar acciones de CRUD en bases de datos relacional (MySQL) y base de datos no relacionales (MongoDB).
+An Express project designed to perform CRUD actions on relational (MySQL) and non-relational (MongoDB) databases.
 
 1. ## MongoDB Connection
-- Se conecta a la base de datos y se pueden ver los datos de la coneccion atravez de la ruta en el puerto 5000, gracias al archivo 'server.js' 
+- It connects to the database, and connection data can be viewed through the route on port 5000, thanks to the 'server.js' file.
 
 2. ## MySQL Connection
-- Se conecta a la base de datos y se pueden ver los datos de la coneccion atravez de la ruta en el puerto 5500, gracias al archivo 'serverSQL.js' 
+- It connects to the database, and connection data can be viewed through the route on port 5500, thanks to the 'serverSQL.js' file.
