@@ -38,43 +38,33 @@ app.post('/postUsers', async(req,res,next) => {
     }
 })
 
-app.put('/testUpdate/:id', async(req,res,next) => {    
-    try{
-        const {id} = req.params;
-        const {nombre} = req.body;
-        const product = await Testing.findByIdAndUpdate(id, {"nombre": nombre})
-        if(!product){
-            return res.status(404).json({message: 'cannot not find the product'})
-        }else{
-            res.status(200).json(product);
-        }
-    } catch {
-        console.log(error.message)
-        res.status(500).json({message: error.message})
-    }
-})
-
-app.delete('/testDeleteConection/:id', async (req, res, next) => {
+app.put('/testUpdate/:id', async (req, res, next) => {
     try {
         const { id } = req.params;
-        let { sg_estado } = req.body;
+        const { nombreUsuario, apellidoUsuario, contrasenaUsuario, rol } = req.body;
+        const user = await Testing.findOneAndUpdate(
+            { idUsuario: id }, 
+            { nombreUsuario, apellidoUsuario, contrasenaUsuario, rol }, 
+            { new: true }
+        );
+        if (!user) {
+            return res.status(404).json({ message: 'Cannot find the user' });
+        } else {
+            res.status(200).json(user);
+        }
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({ message: error.message });
+    }
+});
 
-        sg_estado = parseInt(sg_estado, 10);
-
-        const product = await Testing.findById(id);
-
+app.delete('/userDelete/:id', async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const product = await Testing.findOneAndDelete({ idUsuario: id });
         if (!product) {
-            return res.status(404).json({ message: 'Cannot find the product' });
+            return res.status(404).json({ message: 'Cannot find the user' });
         }
-
-        const lastIndex = product.sg_estado.lastIndexOf(sg_estado);
-
-        if (lastIndex !== -1) {
-            product.sg_estado.splice(lastIndex, 1);
-        }
-
-        await product.save();
-
         res.status(200).json(product);
     } catch (error) {
         console.log(error.message);
